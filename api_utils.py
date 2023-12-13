@@ -50,7 +50,9 @@ def get_rarest_achievement_percentage(data):
 	Returns:
 		str: The percentage completion of the game's rarest achievement.
 	"""
-	return min(data, key=lambda x: x.get('percent', 100)).get('percent')
+	rarest_percentage = min(data, key=lambda x: x.get('percent', 100)).get('percent')
+	rounded_percentage = round(rarest_percentage, 1)
+	return f"{rounded_percentage:.1f}"
 
 def player_has_completed(steamid, appid):
 	"""

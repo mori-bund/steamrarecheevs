@@ -57,12 +57,12 @@ To use the script, follow these steps:
 
 ## Output
 
-The script will generate CSV files containing the scraped data in a `data` directory. Each CSV file corresponds to a Steam user's library.
+The script will generate CSV files containing the scraped data in a `data` directory. Each CSV file corresponds to a Steam user's library and is sorted in descending order by the rarest achievement column.
 
 ## Notes
 
 * Please let me know if you find any bugs! I am a complete amateur and just barely know what I'm doing, but I am aware this script is not optimized at all.
-* Large libraries will take a longer time to scrape the first time it is run.
+* Large libraries will take a longer time to scrape the first time it is run. My 3000+ game library takes over 20 minutes to fully scrape.
 * Rescanning games without achievements will also take a long time since there are well over 10,000 games in the list.
 * If you scan a library that already has a CSV file saved, it will skip games already saved in the file. The script does NOT update the 100% status of a game when scanning again. I may add this functionality later.
 * Steam allows some granularity with making the profile private. I probably didn't catch every nuance of this. The script will close if the profile is totally locked down, and the script will return all data except completion status if achievement data is locked down.

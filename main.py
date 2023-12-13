@@ -74,7 +74,7 @@ def main():
 		with open("no_achievements.txt", 'r', encoding='utf-8') as txtfile:
 			appids = [int(line.strip()) for line in txtfile.readlines()]
 		num_games = len(appids)
-		progress_bar = tqdm(total=num_games, unit='game', ncols=100)
+		progress_bar = tqdm(total=num_games, unit='games', ncols=100)
 		update_no_achievements(appids, num_games, progress_bar)
 		sys.exit()
 
@@ -87,7 +87,7 @@ def main():
 		print(f"Either the SteamID is invalid or the profile may be set to private.")
 		sys.exit(1)
 
-	progress_bar = tqdm(total=len(owned_games), unit='game', ncols=100)
+	progress_bar = tqdm(total=len(owned_games), unit='games', ncols=100)
 
 	try:
 		scraped_data, no_achievements = scrape_steam_data(steamid, existing_appids, owned_games, progress_bar)
