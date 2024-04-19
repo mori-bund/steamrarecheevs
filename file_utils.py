@@ -9,6 +9,7 @@ DATA_DIR = 'data'
 if not os.path.exists(DATA_DIR):
     os.makedirs(DATA_DIR)
 
+
 def load_existing_appids(steamid):
     """
     Get a list of AppIDs that have already been scanned. Gets them from an
@@ -24,7 +25,7 @@ def load_existing_appids(steamid):
     csv_filename = os.path.join(DATA_DIR, f"{steamid}.csv")
     txt_filename = "no_achievements.txt"
     existing_appids = set()
-    
+
     if os.path.isfile(csv_filename):
         with open(csv_filename, 'r', newline='', encoding='utf-8') as csvfile:
             csv_reader = csv.reader(csvfile)
@@ -39,8 +40,9 @@ def load_existing_appids(steamid):
             for row in csv_reader:
                 appid = int(row[0])
                 existing_appids.add(appid)
-    
+
     return existing_appids
+
 
 def save_to_csv(data, steamid):
     """
@@ -60,7 +62,8 @@ def save_to_csv(data, steamid):
         csv_writer = csv.writer(csvfile)
 
         if not file_exists:
-            csv_writer.writerow(['AppID', 'Title', 'Rarest Achievement %', 'Completed'])
+            csv_writer.writerow(
+                ['AppID', 'Title', 'Rarest Achievement %', 'Completed'])
 
         for row in data:
             csv_writer.writerow(row)
@@ -68,6 +71,7 @@ def save_to_csv(data, steamid):
     df = pd.read_csv(csv_filename)
     df = df.sort_values(by='Rarest Achievement %', ascending=False)
     df.to_csv(csv_filename, index=False)
+
 
 def save_appids_without_achievements(appids):
     """
@@ -81,6 +85,7 @@ def save_appids_without_achievements(appids):
     with open(txt_filename, 'a', encoding='utf-8') as txtfile:
         for appid in appids:
             txtfile.write(str(appid) + '\n')
+
 
 def update_no_achievements(appids, num_games, progress_bar):
     """
@@ -98,7 +103,7 @@ def update_no_achievements(appids, num_games, progress_bar):
             updated_appids.append(appid)
             num_games -= 1
         progress_bar.update(1)
-        
+
     with open("no_achievements.txt", 'w', encoding='utf-8') as txtfile:
         for appid in updated_appids:
             txtfile.write(str(appid) + '\n')
